@@ -8,17 +8,24 @@
 #noise-pad:active {
 	background: gray;
 }
-
+button {
+	background: none;
+	outline: none;
+	border: none;
+}
 .key {
 	display: inline-block;
 	width: 50px;
 	height: 150px;
+	border: 1px solid black;
 }
-
-.black {
+.white.key {
+	background: white;
+}
+.black.key {
 	background: black;
 }
 
-button:active {
+.key:active {
 	background: lightgray;
 }

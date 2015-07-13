@@ -1,0 +1,25 @@
+{
+  "name": "synth-app",
+  "version": "0.0.0",
+  "description": "General Assembly - WDI Melville Final Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxrpeterson/synth-app.git"
+  },
+  "author": "Max Peterson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxrpeterson/synth-app/issues"
+  },
+  "homepage": "https://github.com/maxrpeterson/synth-app",
+  "devDependencies": {
+    "morgan": "^1.6.1"
+  },
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
