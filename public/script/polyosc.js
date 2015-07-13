@@ -1,4 +1,6 @@
-
+function Module(func){
+	func(Tone);
+};
 Module(function (Tone) {
 	// this class takes liberally from Tone.js's built in classes
   Tone.PolyOsc = function (options) {
@@ -13,6 +15,8 @@ Module(function (Tone) {
     // 3rd osc
     this.osc2 = new Tone.OmniOscillator(options.osc2);
     this.osc2.volume.value = -10;
+    // enumerate through oscillators
+    this.oscs = {osc0: this.osc0, osc1: this.osc1, osc2: this.osc2};
     // who knows, might be cool to have some vibrato?
     this._vibrato = new Tone.LFO(options.vibratoRate, -50, 50);
     this._vibrato.start();
@@ -49,9 +53,7 @@ Module(function (Tone) {
     this.frequency = new Tone.Signal(440, Tone.Type.Frequency);
 
     //control the three oscillators frequency
-    this.frequency.connect(this.osc0.frequency);
-    this.frequency.connect(this.osc1.frequency);
-    this.frequency.connect(this.osc2.frequency);
+    this.frequency.fan(this.osc0.frequency, this.osc1.frequency, this.osc2.frequency);
 
     // connects the vibrato
     this._vibrato.connect(this._vibratoGain);
@@ -62,7 +64,16 @@ Module(function (Tone) {
     this.filterEnvelope = new Tone.ScaledEnvelope(options.filterEnvelope);
 
     this.envelope = new Tone.AmplitudeEnvelope(options.envelope);
-    this.envelope.connect(this.output);
+
+    this.osc0.connect(this.filter);
+    this.osc1.connect(this.filter);
+    this.osc2.connect(this.filter);
+
+    this.osc0.start();
+    this.osc1.start();
+    this.osc2.start();
+
+    this.filter.chain(this.envelope, this.output);
 
     this._readOnly([
         'osc0',
@@ -78,46 +89,27 @@ Module(function (Tone) {
 	 *  @static
 	 *  @type {Object}
 	 */
-    Tone.PolyOsc.defaults = {
-        'vibratoAmount': 0.5,
-        'vibratoRate': 5,
-        'vibratoDelay': 1,
-        'harmonicity': 1.5,
-        'osc0': {
-            'volume': -10,
-            'portamento': 0,
-            'oscillator': { 'type': 'sine' },
-            'filterEnvelope': {
-                'attack': 0.01,
-                'decay': 0,
-                'sustain': 1,
-                'release': 0.5
-            },
-            'envelope': {
-                'attack': 0.01,
-                'decay': 0,
-                'sustain': 1,
-                'release': 0.5
-            }
-        },
-        'osc1': {
-            'volume': -10,
-            'portamento': 0,
-            'oscillator': { 'type': 'sine' },
-            'filterEnvelope': {
-                'attack': 0.01,
-                'decay': 0,
-                'sustain': 1,
-                'release': 0.5
-            },
-            'envelope': {
-                'attack': 0.01,
-                'decay': 0,
-                'sustain': 1,
-                'release': 0.5
-            }
-        }
-    };
+  Tone.PolyOsc.defaults = {
+    'vibratoAmount': 0,
+    'vibratoRate': 5,
+    'vibratoDelay': 1,
+    'portamento': 0,
+    'osc0': { 'type': 'sine', 'volume': 0 },
+    'osc1': { 'type': 'sine', 'volume': -99 },
+    'osc2': { 'type': 'sine', 'volume': -99 },
+    'filterEnvelope': {
+      'attack': 0,
+      'decay': 0.5,
+      'sustain': 0,
+      'release': 1
+    },
+    'envelope': {
+      'attack': 0.01,
+      'decay': 0,
+      'sustain': 1,
+      'release': 0.5
+    }
+  };
     /**
 	 *  start the attack portion of the envelopes
 	 *  
@@ -128,10 +120,8 @@ Module(function (Tone) {
 	 */
     Tone.PolyOsc.prototype._triggerEnvelopeAttack = function (time, velocity) {
         time = this.toSeconds(time);
-        this.voice0.envelope.triggerAttack(time, velocity);
-        this.voice1.envelope.triggerAttack(time, velocity);
-        this.voice0.filterEnvelope.triggerAttack(time);
-        this.voice1.filterEnvelope.triggerAttack(time);
+        this.envelope.triggerAttack(time, velocity);
+        this.filterEnvelope.triggerAttack(time);
         return this;
     };
     /**
@@ -142,42 +132,39 @@ Module(function (Tone) {
 	 *  @private
 	 */
     Tone.PolyOsc.prototype._triggerEnvelopeRelease = function (time) {
-        this.voice0.triggerRelease(time);
-        this.voice1.triggerRelease(time);
+        this.envelope.triggerRelease(time);
         return this;
     };
     /**
 	 *  clean up
 	 *  @returns {Tone.DuoSynth} this
 	 */
-    Tone.PolyOsc.prototype.dispose = function () {
-        Tone.Monophonic.prototype.dispose.call(this);
-        this._writable([
-            'osc0',
-            'osc1',
-            'osc2',
-            'frequency',
-            'vibratoAmount',
-            'vibratoRate'
-        ]);
-        this.osc0.dispose();
-        this.osc0 = null;
-        this.osc1.dispose();
-        this.osc1 = null;
-        this.osc2.dispose();
-        this.osc2 = null;
-        this.frequency.dispose();
-        this.frequency = null;
-        this._vibrato.dispose();
-        this._vibrato = null;
-        this._vibratoGain.disconnect();
-        this._vibratoGain = null;
-        this.harmonicity.dispose();
-        this.harmonicity = null;
-        this.vibratoAmount.dispose();
-        this.vibratoAmount = null;
-        this.vibratoRate = null;
-        return this;
-    };
-    return Tone.DuoSynth;
+	Tone.PolyOsc.prototype.dispose = function () {
+    Tone.Monophonic.prototype.dispose.call(this);
+    this._writable([
+      'osc0',
+      'osc1',
+      'osc2',
+      'frequency',
+      'vibratoAmount',
+      'vibratoRate'
+    ]);
+    this.osc0.dispose();
+    this.osc0 = null;
+    this.osc1.dispose();
+    this.osc1 = null;
+    this.osc2.dispose();
+    this.osc2 = null;
+    this.frequency.dispose();
+    this.frequency = null;
+    this._vibrato.dispose();
+    this._vibrato = null;
+    this._vibratoGain.disconnect();
+    this._vibratoGain = null;
+    this.vibratoAmount.dispose();
+    this.vibratoAmount = null;
+    this.vibratoRate = null;
+    return this;
+  };
+  return Tone.DuoSynth;
 });

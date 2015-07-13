@@ -1,0 +1,10 @@
+#noise-pad {
+	display: inline-block;
+	background: lightgray;
+	width: 500px;
+	height: 500px;
+	cursor: default;
+}
+#noise-pad:active {
+	background: gray;
+}

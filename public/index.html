@@ -9,8 +9,18 @@
 </head>
 <body>
 
+	<div id="oscillators">
+		<div class="osc one">
+			<label>Osc 1 Waveform</label>
+			<input type="range" min="0" max="2" name="type" data-labels="sine,sawtooth,square,triangle,pulse,PWM" class="preset1" data-width="150" data-height="150">
+		</div>
+		<div class="osc two"></div>
+		<div class="osc three"></div>
+	</div>
+
+
 	<div id="keyboard">
-		<button class="white key" data-note="C3"></button>
+<!-- 		<button class="white key" data-note="C3"></button>
 		<button class="black key" data-note="C#3"></button>
 		<button class="white key" data-note="D3"></button>
 		<button class="black key" data-note="D#3"></button>
@@ -22,10 +32,12 @@
 		<button class="white key" data-note="A3"></button>
 		<button class="black key" data-note="A#3"></button>
 		<button class="white key" data-note="B3"></button>
-		<button class="white key" data-note="C4"></button>
+		<button class="white key" data-note="C4"></button> -->
 	</div>
 	
+	<script type="text/javascript" src="script/knob.js"></script>
 	<script type="text/javascript" src="script/polyosc.js"></script>
+	<script type="text/javascript" src="qwerty-hancock/src/qwerty-hancock.js"></script>
 	<script type="text/javascript" src="script/main.js"></script>
 </body>
 </html>
