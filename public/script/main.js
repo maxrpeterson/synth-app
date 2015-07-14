@@ -27,33 +27,43 @@ keyboard.keyUp = function (note, frequency) {
 };
 
 var controlTarget = function(e) {
-	return e.target.parentElement.dataset.osc;
+	console.log(e.target.parentElement.dataset.control);
+	return e.target.parentElement.dataset.control;
 }
 
 var setLevel = function(e) {
-	var osc = oscTarget(e);
+	var osc = controlTarget(e);
 	polyOsc.set(osc, {volume: e.target.value});
 }
 var setOscType = function(e) {
-	var osc = oscTarget(e);
+	var osc = controlTarget(e);
 	polyOsc.set(osc, {type: e.target.value})
 }
 var setOscDetune = function(e) {
-	var osc = oscTarget(e);
+	var osc = controlTarget(e);
 	polyOsc.set(osc, {detune: e.target.value})
+}
+var setFiltCutoff = function(e) {
+	var filter = controlTarget(e);
+	polyOsc.set(filter, {frequency: e.target.value});
+}
+var setFiltQ = function(e) {
+	var filter = controlTarget(e);
+	polyOsc.set(filter, {Q: e.target.value});
 }
 
 window.addEventListener("input", function(e) {
 	e.preventDefault();
+	console.log(e.target.value);
 	if (e.target.name === "volume") {
 		setLevel(e);
 	} else if (e.target.name === "detune") {
-		console.log(e.target.value);
 		setOscDetune(e);
 	} else if (e.target.name === "osc-type") {
-		console.log(e.target.value);
 		setOscType(e);
-	} else if (e.target.name === "filter-cutoff") {
+	} else if (e.target.name === "cutoff") {
 		setFiltCutoff(e);
+	} else if (e.target.name === "Q") {
+		setFiltQ(e);
 	}
 });

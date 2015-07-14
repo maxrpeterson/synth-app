@@ -11,7 +11,7 @@
 
 	<div class="controls">
 		<div class="col" id="oscillators">
-			<section class="osc one" data-osc="osc0">
+			<section class="osc one" data-control="osc0">
 				<h2>Oscillator 1</h2>
 				<label>Waveform</label>
 				<select name="osc-type">
@@ -28,7 +28,7 @@
 				<input type="range" name="detune" min="-100" max="100">
 			</section>
 
-			<section class="osc two" data-osc="osc1">
+			<section class="osc two" data-control="osc1">
 				<h2>Oscillator 2</h2>
 				<label>Waveform</label>
 				<select name="osc-type">
@@ -45,7 +45,7 @@
 				<input type="range" name="detune" min="-100" max="100">
 			</section>
 
-			<section class="osc three" data-osc="osc2">
+			<section class="osc three" data-control="osc2">
 				<h2>Oscillator 3</h2>
 				<label>Waveform</label>
 				<select name="osc-type">
@@ -67,7 +67,9 @@
 			<section class="filter" data-control="filter">
 				<h2>Filter</h2>
 				<label>Cutoff</label>
-				<input type="range" name="cutoff" min="20" max="20000">
+				<input type="range" name="cutoff" min="20" max="20000"><br>
+				<label>Q</label>
+				<input type="range" name="Q" min="0" max="16">
 				
 				<label></label>
 			</section>
