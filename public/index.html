@@ -9,15 +9,70 @@
 </head>
 <body>
 
-	<div id="oscillators">
-		<div class="osc one">
-			<label>Osc 1 Waveform</label>
-			<input type="range" min="0" max="2" name="type" data-labels="sine,sawtooth,square,triangle,pulse,PWM" class="preset1" data-width="150" data-height="150">
-		</div>
-		<div class="osc two"></div>
-		<div class="osc three"></div>
-	</div>
+	<div class="controls">
+		<div class="col" id="oscillators">
+			<section class="osc one" data-osc="osc0">
+				<h2>Oscillator 1</h2>
+				<label>Waveform</label>
+				<select name="osc-type">
+					<option value="sine" selected>Sine Wave</option>
+					<option value="sawtooth">Sawtooth Wave</option>
+					<option value="square">Square Wave</option>
+					<option value="triangle">Triangle Wave</option>
+					<option value="pulse">Pulse Wave</option>
+					<option value="pwm">Pulse Width Modulation</option>
+				</select><br>
+				<label>Level</label>
+				<input type="range" name="volume" min="-99" max="0"><br>
+				<label>Detune</label>
+				<input type="range" name="detune" min="-100" max="100">
+			</section>
 
+			<section class="osc two" data-osc="osc1">
+				<h2>Oscillator 2</h2>
+				<label>Waveform</label>
+				<select name="osc-type">
+					<option value="sine" selected>Sine Wave</option>
+					<option value="sawtooth">Sawtooth Wave</option>
+					<option value="square">Square Wave</option>
+					<option value="triangle">Triangle Wave</option>
+					<option value="pulse">Pulse Wave</option>
+					<option value="pwm">Pulse Width Modulation</option>
+				</select><br>
+				<label>Level</label>
+				<input type="range" name="volume" min="-99" max="0"><br>
+				<label>Detune</label>
+				<input type="range" name="detune" min="-100" max="100">
+			</section>
+
+			<section class="osc three" data-osc="osc2">
+				<h2>Oscillator 3</h2>
+				<label>Waveform</label>
+				<select name="osc-type">
+					<option value="sine" selected>Sine Wave</option>
+					<option value="sawtooth">Sawtooth Wave</option>
+					<option value="square">Square Wave</option>
+					<option value="triangle">Triangle Wave</option>
+					<option value="pulse">Pulse Wave</option>
+					<option value="pwm">Pulse Width Modulation</option>
+				</select><br>
+				<label>Level</label>
+				<input type="range" name="volume" min="-99" max="0"><br>
+				<label>Detune</label>
+				<input type="range" name="detune" min="-100" max="100">
+			</section>
+		</div>
+
+		<div class="col" id="filter-amp">
+			<section class="filter" data-control="filter">
+				<h2>Filter</h2>
+				<label>Cutoff</label>
+				<input type="range" name="cutoff" min="20" max="20000">
+				
+				<label></label>
+			</section>
+		</div>
+	</div>
 
 	<div id="keyboard">
 <!-- 		<button class="white key" data-note="C3"></button>
