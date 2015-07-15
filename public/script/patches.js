@@ -28,5 +28,6 @@ var enableSaving = function() {
 };
 
 var savePatch = function() {
-
+	var settings = polyOsc.get();
+	
 };
