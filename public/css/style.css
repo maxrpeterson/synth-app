@@ -12,6 +12,9 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+.save-load {
+	float: left;
+}
 .fb-login-button {
 	float: right;
 	margin: 0.5em;
