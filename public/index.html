@@ -14,15 +14,15 @@
 		<% for (var key in synth) { %>
 			<% if (key.slice(0,3) === "osc") { %>
 				<section class="osc <%= key %>">
-				<h2>Oscillator <%= key.slice(3,4) %></h2>
+				<h2>Oscillator <%= parseInt(key.slice(3,4)) + 1 %></h2>
 				<label>Waveform</label>
 				<select name="osc-type" data-area="<%= key %>">
-					<% ["sine", "square", "triangle", "sawtooth", "pulse", "pwm"].forEach(function(waveType) { %>
+					<% waveforms.forEach(function(waveType) { %>
 						<option value="<%= waveType %>">
 							<%= waveType.slice(0,1).toUpperCase() + waveType.slice(1) %>
 						</option>
 					<% }) %>
-				</select>
+				</select><br>
 				<label>Level</label>
 				<div class="knob" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div><br>
 				<label>Detune</label>
@@ -31,10 +31,56 @@
 		<% } %>
 	</script>
 
+	<script type="text/template" id="filter-template">
+		<section class="filter" data-area="filter">
+				<h2>Filter</h2>
+				<label>Type</label>
+				<select data-area="filter" name="type">
+				<% filterTypes.forEach(function(filtType) { %>
+					<option value="<%= filtType %>"><%= filtType.slice(0,1).toUpperCase() + filtType.slice(1) %></option>
+				<% }) %>
+				</select><br>
+				<label>Cutoff</label>
+				<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="log" data-units="hz" data-origin="135">&deg;</div>
+				<label>Q</label>
+				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div><br>
+				<label>Amount</label>
+				<input class="vertical" data-area="filterEnvelope" type="range" name="exponent" min="0" max="10" step="0.005">
+				<div class="envelope">
+				</div>
+			</section>
+	</script>
+
+	<script type="text/template" id="envelope-template">
+		<label>Attack</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="attack" min="0" max="2" step="0.005">
+		<label>Decay</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="decay" min="0" max="2" step="0.005">
+		<label>Sustain</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="sustain" min="0" max="1" step="0.005">
+		<label>Release</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="2" step="0.005">
+	</script>
+
+	<script type="text/template" id="amp-template">
+		<section class="amp">
+			<h2>Amplitude Envelope</h2>
+			<div class="envelope">
+			</div>
+		</section>
+	</script>
+
 	<div class="controls">
 		<div class="col" id="oscillators">
 		</div>
 	</div>
+
+	<div class="col" id="filter-amp">
+	</div>
+
+	<div class="col" id="effects">
+	</div>
+
 
 	<div id="keyboard">
 	</div>

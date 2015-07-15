@@ -1,5 +1,7 @@
 var uiKeyboard = document.querySelector("#keyboard");
 
+// generate the keyboard, may change this later
+// so i can make it a little better looking?
 var keyboard = new QwertyHancock({
 	id: 'keyboard',
 	width: parseInt(window.innerWidth),
@@ -16,23 +18,24 @@ uiKeyboard.style.left = 0;
 
 document.querySelector(".controls").style.height = (window.innerHeight / 3) * 2;
 
+// create the synth
 var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
 polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000},filterEnvelope: {max: 2000}});
 
-var templateHtml = document.querySelector("#oscillator-template").innerHTML;
-var template = _.template(templateHtml);
-
-document.querySelector("#oscillators").innerHTML = template({synth: polyOsc.get()});
-
+// possible options to pass to templates
+var waveforms = ["sine", "square", "triangle", "sawtooth", "pulse", "pwm"];
+var filterTypes = ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass", "peaking"];
 
 
-// template: _.template( $("#muppet-template").html() ),
-// 	render: function() {
-// 		this.$el.html(this.template({muppet: this.model.toJSON()}));
-// 		return this;
+// using templates
+var oscTemplate = _.template(document.querySelector("#oscillator-template").innerHTML);
+document.querySelector("#oscillators").innerHTML = template({synth: polyOsc.get(), waveforms: waveforms});
 
+var filtTemplate = _.template(document.querySelector("#filter-template").innerHTML);
+var filterHTML = filtTemplate({filterTypes: filterTypes});
+var ampTemplate = _.template(document.querySelector("#amp-template").innerHTML);
 
-
+// set the keydown/up handlers of the keyboard
 keyboard.keyDown = function (note, frequency) {
 	polyOsc.triggerAttack(note);
 };
@@ -40,6 +43,7 @@ keyboard.keyUp = function (note, frequency) {
 	polyOsc.triggerRelease(note);
 };
 
+// handlers for select inputs
 var setType = function(e) {
 	var area = e.target.dataset.area;
 	polyOsc.set(area, {type: e.target.value});
@@ -61,6 +65,7 @@ window.addEventListener("input", function(e) {
 	}
 });
 
+// knob handlers (har har), could probably be cleaned up a bit?
 var setAttr = function(targetKnob, e) {
 	// get the current rotate amount of the knob
 	var currRotation = parseInt(targetKnob.style.transform.slice(7, -4));
@@ -76,6 +81,7 @@ var setAttr = function(targetKnob, e) {
 		var increment;
 		var rotationDiff = newRotation - rotationOrigin;
 		if (targetKnob.dataset.scale === "log") {
+			// fix this
 			increment = (range / 270);
 		} else {
 			increment = range / 270;
