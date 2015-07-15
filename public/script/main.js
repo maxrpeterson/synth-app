@@ -17,7 +17,21 @@ uiKeyboard.style.left = 0;
 document.querySelector(".controls").style.height = (window.innerHeight / 3) * 2;
 
 var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
-polyOsc.set({osc1: {volume: -999}, osc2: {volume: -999},filter: {frequency: 20000},filterEnvelope: {max: 2000}});
+polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000},filterEnvelope: {max: 2000}});
+
+var templateHtml = document.querySelector("#oscillator-template").innerHTML;
+var template = _.template(templateHtml);
+
+document.querySelector("#oscillators").innerHTML = template({synth: polyOsc.get()});
+
+
+
+// template: _.template( $("#muppet-template").html() ),
+// 	render: function() {
+// 		this.$el.html(this.template({muppet: this.model.toJSON()}));
+// 		return this;
+
+
 
 keyboard.keyDown = function (note, frequency) {
 	polyOsc.triggerAttack(note);
