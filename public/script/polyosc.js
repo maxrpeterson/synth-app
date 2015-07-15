@@ -4,7 +4,7 @@ function Module(func){
 Module(function (Tone) {
 	// this class takes liberally from Tone.js's built in classes
   Tone.PolyOsc = function (options) {
-    options = this.defaultArg(options, Tone.DuoSynth.defaults);
+    options = this.defaultArg(options, Tone.PolyOsc.defaults);
     Tone.Monophonic.call(this, options);
     // 1st osc
     this.osc0 = new Tone.OmniOscillator(options.osc0);
@@ -62,9 +62,9 @@ Module(function (Tone) {
     // filter
     this.filter = new Tone.Filter(options.filter);
     this.filterEnvelope = new Tone.ScaledEnvelope(options.filterEnvelope);
+    this.filterEnvelope.connect(this.filter.frequency);
 
     this.envelope = new Tone.AmplitudeEnvelope(options.envelope);
-    this.filterEnvelope.connect(this.filter.frequency);
 
     this.osc0.connect(this.filter);
     this.osc1.connect(this.filter);
@@ -103,7 +103,8 @@ Module(function (Tone) {
       'decay': 0.5,
       'sustain': 0,
       'release': 1,
-      'max': 20000
+      'max': 20000,
+      'attackCurve': 'exponential'
     },
     'envelope': {
       'attack': 0.01,
