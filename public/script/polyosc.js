@@ -99,6 +99,11 @@ Module(function (Tone) {
     'osc0': { 'type': 'sine', 'volume': 0 },
     'osc1': { 'type': 'sine', 'volume': -99 },
     'osc2': { 'type': 'sine', 'volume': -99 },
+		'filter': {
+      'Q': 6,
+      'type': 'lowpass',
+      'rolloff': -12
+    },
     'filterEnvelope': {
       'attack': 0,
       'decay': 0.5,

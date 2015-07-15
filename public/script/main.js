@@ -16,7 +16,8 @@ uiKeyboard.style.position = "absolute";
 uiKeyboard.style.bottom = 0;
 uiKeyboard.style.left = 0;
 
-document.querySelector(".controls").style.height = (window.innerHeight / 3) * 2;
+document.querySelector(".controls").style.height = (window.innerHeight / 3 * 2) + "px";
+
 
 // create the synth
 var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
@@ -121,7 +122,7 @@ var displayParams = function(elem, val) {
 	}, 1000);
 };
 
-var startChangeListener = function(event) {
+var startKnobListener = function(event) {
 	if (event.target.tagName === "DIV" && event.target.classList.contains("knob")) {
 		var stopChangeListener = function(e) {
 			window.removeEventListener("mousemove", moveHandler);
@@ -136,4 +137,4 @@ var startChangeListener = function(event) {
 	}
 };
 
-window.addEventListener("mousedown", startChangeListener);
+window.addEventListener("mousedown", startKnobListener);

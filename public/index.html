@@ -9,6 +9,29 @@
 	<script type="text/javascript" src="underscore/underscore.js"></script>
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1611695462433996',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+	<header>
+		<div class="save-load"></div>
+		<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLogin();">Log In to save patches</div>
+	</header>
 
 	<div class="controls">
 		<div class="col" id="oscillators">
@@ -59,7 +82,7 @@
 				<label>Q</label>
 				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
 				<label>Env Amt</label>
-				<div class="knob" style="transform: rotate(-135deg)" data-area="filterEnvelope" data-control="exponent" data-min="0" data-max="10" data-basevalue="0" data-origin="-135" data-scale="linear">&deg;</div><br>
+				<div class="knob" style="transform: rotate(-135deg)" data-area="filterEnvelope" data-control="exponent" data-min="0" data-max="10" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
 				<div class="envelope">
 				</div>
 			</section>
@@ -84,7 +107,7 @@
 		<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="3" step="0.005" data-units="s" value="<%= env.release %>">
 	</script>
 
-	<script type="text/javascript" src="script/knob.js"></script>
+	<script type="text/javascript" src="script/patches.js"></script>
 	<script type="text/javascript" src="script/polyosc.js"></script>
 	<script type="text/javascript" src="qwerty-hancock/src/qwerty-hancock.js"></script>
 	<script type="text/javascript" src="script/main.js"></script>
