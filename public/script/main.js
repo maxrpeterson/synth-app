@@ -29,11 +29,19 @@ var filterTypes = ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "
 
 // using templates
 var oscTemplate = _.template(document.querySelector("#oscillator-template").innerHTML);
-document.querySelector("#oscillators").innerHTML = template({synth: polyOsc.get(), waveforms: waveforms});
+document.querySelector("#oscillators").innerHTML = oscTemplate({synth: polyOsc.get(), waveforms: waveforms});
 
 var filtTemplate = _.template(document.querySelector("#filter-template").innerHTML);
 var filterHTML = filtTemplate({filterTypes: filterTypes});
 var ampTemplate = _.template(document.querySelector("#amp-template").innerHTML);
+var ampHTML = ampTemplate({});
+
+var envelopeTemplate = _.template(document.querySelector("#envelope-template").innerHTML);
+
+document.querySelector("#filter-amp").innerHTML = filterHTML + ampHTML;
+
+document.querySelector("section.filter .envelope").innerHTML = envelopeTemplate({area: "filterEnvelope", env: polyOsc.get("filterEnvelope").filterEnvelope});
+document.querySelector("section.amp .envelope").innerHTML = envelopeTemplate({area: "envelope", env: polyOsc.get("envelope").envelope});
 
 // set the keydown/up handlers of the keyboard
 keyboard.keyDown = function (note, frequency) {
@@ -51,13 +59,12 @@ var setType = function(e) {
 var setRange = function(e) {
 	var area = e.target.dataset.area;
 	var params = {};
-	console.log(area, e.target.name);
 	params[e.target.name] = parseFloat(e.target.value);
 	polyOsc.set(area, params);
+	displayParams(e.target, parseFloat(e.target.value));
 };
 
 window.addEventListener("input", function(e) {
-	console.log(e.target.value);
 	if (e.target.tagName === "SELECT") {
 		setType(e);
 	} else if (e.target.tagName === "INPUT" && e.target.type === "range") {
@@ -89,10 +96,28 @@ var setAttr = function(targetKnob, e) {
 		var newVal = baseValue + rotationDiff * increment;
 		var params = {};
 		params[targetKnob.dataset.control] = newVal;
-		polyOsc.set(targetKnob.dataset.area, params);	
+		polyOsc.set(targetKnob.dataset.area, params);
+		displayParams(targetKnob, newVal)
 	}
 };
 
+var hideParamsTimeout;
+var paramsWindow = document.querySelector("#params");
+
+var displayParams = function(elem, val) {
+	if (typeof hideParamsTimeout !== undefined) {
+		window.clearTimeout(hideParamsTimeout);
+	}
+	paramsWindow.textContent = val + " " + elem.dataset.units
+	paramsWindow.classList.remove("hide");
+	var top = elem.getBoundingClientRect().top + (elem.offsetHeight / 2);
+	var left = elem.getBoundingClientRect().left + elem.offsetWidth;
+	paramsWindow.style.top = top + "px";
+	paramsWindow.style.left = left + "px";
+	hideParamsTimeout = window.setTimeout(function() {
+		paramsWindow.classList.add("hide");
+	}, 1000);
+};
 
 var startChangeListener = function(event) {
 	if (event.target.tagName === "DIV" && event.target.classList.contains("knob")) {

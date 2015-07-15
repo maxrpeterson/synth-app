@@ -10,6 +10,20 @@
 </head>
 <body>
 
+	<div class="controls">
+		<div class="col" id="oscillators">
+		</div>
+		<div class="col" id="filter-amp">
+		</div>
+		<div class="col" id="effects">
+		</div>
+	</div>
+
+	<div id="keyboard">
+	</div>
+
+	<div id="params" class="hide"></div>
+	
 	<script type="text/template" id="oscillator-template">
 		<% for (var key in synth) { %>
 			<% if (key.slice(0,3) === "osc") { %>
@@ -24,7 +38,7 @@
 					<% }) %>
 				</select><br>
 				<label>Level</label>
-				<div class="knob" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div><br>
+				<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
 				<label>Detune</label>
 				<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
 			<% } %>
@@ -43,23 +57,12 @@
 				<label>Cutoff</label>
 				<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="log" data-units="hz" data-origin="135">&deg;</div>
 				<label>Q</label>
-				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div><br>
-				<label>Amount</label>
-				<input class="vertical" data-area="filterEnvelope" type="range" name="exponent" min="0" max="10" step="0.005">
+				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+				<label>Env Amt</label>
+				<div class="knob" style="transform: rotate(-135deg)" data-area="filterEnvelope" data-control="exponent" data-min="0" data-max="10" data-basevalue="0" data-origin="-135" data-scale="linear">&deg;</div><br>
 				<div class="envelope">
 				</div>
 			</section>
-	</script>
-
-	<script type="text/template" id="envelope-template">
-		<label>Attack</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="attack" min="0" max="2" step="0.005">
-		<label>Decay</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="decay" min="0" max="2" step="0.005">
-		<label>Sustain</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="sustain" min="0" max="1" step="0.005">
-		<label>Release</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="2" step="0.005">
 	</script>
 
 	<script type="text/template" id="amp-template">
@@ -70,21 +73,17 @@
 		</section>
 	</script>
 
-	<div class="controls">
-		<div class="col" id="oscillators">
-		</div>
-	</div>
+	<script type="text/template" id="envelope-template">
+		<label>Attack</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="attack" min="0" max="3" step="0.005" data-units="s" value="<%= env.attack %>">
+		<label>Decay</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="decay" min="0" max="3" step="0.005" data-units="s" value="<%= env.decay %>">
+		<label>Sustain</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="sustain" min="0" max="1" step="0.005" data-units="" value="<%= env.sustain %>">
+		<label>Release</label>
+		<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="3" step="0.005" data-units="s" value="<%= env.release %>">
+	</script>
 
-	<div class="col" id="filter-amp">
-	</div>
-
-	<div class="col" id="effects">
-	</div>
-
-
-	<div id="keyboard">
-	</div>
-	
 	<script type="text/javascript" src="script/knob.js"></script>
 	<script type="text/javascript" src="script/polyosc.js"></script>
 	<script type="text/javascript" src="qwerty-hancock/src/qwerty-hancock.js"></script>

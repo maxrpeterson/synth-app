@@ -17,6 +17,19 @@ button {
 	outline: none;
 	border: none;
 }
+.hide {
+	display: none;
+}
+#params {
+	font-size: 18px;
+	background: #eee;
+	border-radius: 3px;
+	border: 1px solid #7a7a7a;
+	z-index: 9999;
+	position: fixed;
+	padding: 0.5em;
+	color: #222;
+}
 .col {
 	display: inline-block;
 	width: 28%;
@@ -24,7 +37,7 @@ button {
 	margin: 0;
 	vertical-align: top;
 }
-div.adsr {
+div.envelope {
 	position: relative;
 	height: 150px;
 }
