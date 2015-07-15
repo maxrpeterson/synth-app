@@ -11,10 +11,10 @@
 
 	<div class="controls">
 		<div class="col" id="oscillators">
-			<section class="osc one" data-control="osc0">
+			<section class="osc one">
 				<h2>Oscillator 1</h2>
 				<label>Waveform</label>
-				<select name="osc-type">
+				<select name="osc-type" data-area="osc0">
 					<option value="sine" selected>Sine Wave</option>
 					<option value="sawtooth">Sawtooth Wave</option>
 					<option value="square">Square Wave</option>
@@ -23,15 +23,15 @@
 					<option value="pwm">Pulse Width Modulation</option>
 				</select><br>
 				<label>Level</label>
-				<input type="range" name="volume" min="-99" max="0"><br>
+				<div class="knob" style="transform: rotate(-135deg);" data-area="osc0" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div><br>
 				<label>Detune</label>
-				<input type="range" name="detune" min="-100" max="100">
+				<div class="knob" style="transform: rotate(0deg);" data-area="osc0" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
 			</section>
 
-			<section class="osc two" data-control="osc1">
+			<section class="osc two">
 				<h2>Oscillator 2</h2>
 				<label>Waveform</label>
-				<select name="osc-type">
+				<select name="osc-type" data-area="osc1">
 					<option value="sine" selected>Sine Wave</option>
 					<option value="sawtooth">Sawtooth Wave</option>
 					<option value="square">Square Wave</option>
@@ -40,15 +40,15 @@
 					<option value="pwm">Pulse Width Modulation</option>
 				</select><br>
 				<label>Level</label>
-				<input type="range" name="volume" min="-99" max="0"><br>
+				<div class="knob" style="transform: rotate(-135deg);" data-area="osc1" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div><br>
 				<label>Detune</label>
-				<input type="range" name="detune" min="-100" max="100">
+				<div class="knob" style="transform: rotate(0deg);" data-area="osc1" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
 			</section>
 
-			<section class="osc three" data-control="osc2">
+			<section class="osc three">
 				<h2>Oscillator 3</h2>
 				<label>Waveform</label>
-				<select name="osc-type">
+				<select name="osc-type" data-area="osc2">
 					<option value="sine" selected>Sine Wave</option>
 					<option value="sawtooth">Sawtooth Wave</option>
 					<option value="square">Square Wave</option>
@@ -57,21 +57,43 @@
 					<option value="pwm">Pulse Width Modulation</option>
 				</select><br>
 				<label>Level</label>
-				<input type="range" name="volume" min="-99" max="0"><br>
+				<div class="knob" style="transform: rotate(-135deg);" data-area="osc2" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div><br>
 				<label>Detune</label>
-				<input type="range" name="detune" min="-100" max="100">
+				<div class="knob" style="transform: rotate(0deg);" data-area="osc2" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
 			</section>
 		</div>
 
 		<div class="col" id="filter-amp">
-			<section class="filter" data-control="filter">
+			<section class="filter" data-area="filter">
 				<h2>Filter</h2>
+				<label>Type</label>
+				<select data-area="filter" name="type">
+					<option value="lowpass">Lowpass</option>
+					<option value="highpass">Highpass</option>
+					<option value="bandpass">Bandpass</option>
+					<option value="lowshelf">Lowpass</option>
+					<option value="highshelf">Highshelf</option>
+					<option value="notch">Notch</option>
+					<option value="allpass">Allpass</option>
+					<option value="peaking">Peaking</option>
+				</select><br>
 				<label>Cutoff</label>
-				<input type="range" name="cutoff" min="20" max="20000"><br>
+				<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="log" data-units="hz" data-origin="135">&deg;</div>
 				<label>Q</label>
-				<input type="range" name="Q" min="0" max="16">
+				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div><br>
+				<div class="adsr">
+					<label>Attack</label>
+					<input class="vertical" height="50px" width="10px" data-area="filterEnvelope" type="range" name="attack" min="0" max="2" step="0.005">
+					<label>Decay</label>
+					<input class="vertical" height="50px" width="10px" data-area="filterEnvelope" type="range" name="decay" min="0" max="2" step="0.005">
+					<label>Sustain</label>
+					<input class="vertical" height="50px" width="10px" data-area="filterEnvelope" type="range" name="sustain" min="0" max="1" step="0.005">
+					<label>Release</label>
+					<input class="vertical" height="50px" width="10px" data-area="filterEnvelope" type="range" name="release" min="0" max="2" step="0.005">
+					<label>Amount</label>
+					<input class="vertical" height="50px" width="10px" data-area="filterEnvelope" type="range" name="exponent" min="0" max="10" step="0.005">
+				</div>
 				
-				<label></label>
 			</section>
 		</div>
 	</div>

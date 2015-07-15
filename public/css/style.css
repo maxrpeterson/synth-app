@@ -5,6 +5,12 @@ body {
 	font-size: 12px;
 	background: #222;
 	color: #eee;
+	-webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 button {
 	background: none;
@@ -18,25 +24,43 @@ button {
 	margin: 0;
 	vertical-align: top;
 }
+div.adsr {
+	position: relative;
+	height: 150px;
+}
+input[type="range"].vertical {
+	transform: rotate(270deg) translateY(-50%);
+	position: absolute;
+	top: 50%;
+	margin-left: -7em;
+}
+.knob {
+	border-radius: 50%;
+	background: #eee;
+	color: black;
+	display: inline-block;
+	font-size: 12px;
+	height: 18px;
+	width: 18px;
+	padding: 1px;
+	margin: 0.2em;
+	vertical-align: center;
+	cursor: ns-resize;
+	border: 1px solid #7a7a7a;
+	box-shadow: 0 0 5px #7a7a7a;
+	text-align: center;
+}
+.knob:active {
+	background: #c0c0c0;
+}
+.knob.big {
+	height: 30px;
+	width: 30px;
+}
 select {
 	outline: none;
 	border: none;
 	padding: 1em;
 	font-size: 1em;
+	width: 11em;
 }
-/*.key {
-	display: inline-block;
-	width: 50px;
-	height: 150px;
-	border: 1px solid black;
-}
-.white.key {
-	background: white;
-}
-.black.key {
-	background: black;
-}
-
-.key:active {
-	background: lightgray;
-}*/

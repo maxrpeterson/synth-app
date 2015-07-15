@@ -64,6 +64,7 @@ Module(function (Tone) {
     this.filterEnvelope = new Tone.ScaledEnvelope(options.filterEnvelope);
 
     this.envelope = new Tone.AmplitudeEnvelope(options.envelope);
+    this.filterEnvelope.connect(this.filter.frequency);
 
     this.osc0.connect(this.filter);
     this.osc1.connect(this.filter);
@@ -101,7 +102,8 @@ Module(function (Tone) {
       'attack': 0,
       'decay': 0.5,
       'sustain': 0,
-      'release': 1
+      'release': 1,
+      'max': 20000
     },
     'envelope': {
       'attack': 0.01,
@@ -133,6 +135,7 @@ Module(function (Tone) {
 	 */
     Tone.PolyOsc.prototype._triggerEnvelopeRelease = function (time) {
         this.envelope.triggerRelease(time);
+        this.filterEnvelope.triggerRelease();
         return this;
     };
     /**
