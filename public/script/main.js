@@ -89,7 +89,9 @@ var setAttr = function(targetKnob, e) {
 		var rotationDiff = newRotation - rotationOrigin;
 		if (targetKnob.dataset.scale === "log") {
 			// fix this
-			increment = (range / 270);
+			increment = (range / 270) // / Math.pow(newRotation - rotationOrigin);
+		} else if (targetKnob.dataset.scale === "exp") {
+			increment = (range / 270) // / Math.pow(newRotation - rotationOrigin);
 		} else {
 			increment = range / 270;
 		}

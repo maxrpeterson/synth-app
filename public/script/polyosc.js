@@ -80,6 +80,7 @@ Module(function (Tone) {
         'osc0',
         'osc1',
         'osc2',
+        'filter',
         'frequency',
         'vibratoAmount',
         'vibratoRate'
