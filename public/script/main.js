@@ -60,7 +60,7 @@ window.addEventListener("load", function() {
 		var params = {};
 		params[e.target.name] = parseFloat(e.target.value);
 		polyOsc.set(area, params);
-		displayParams(e.target, parseFloat(e.target.value));
+		displayStatus(e.target.dataset.area + " " + e.target.name, parseFloat(e.target.value), e.target.dataset.units);
 	};
 
 	window.addEventListener("input", function(e) {
@@ -98,26 +98,20 @@ window.addEventListener("load", function() {
 			var params = {};
 			params[targetKnob.dataset.control] = newVal;
 			polyOsc.set(targetKnob.dataset.area, params);
-			displayParams(targetKnob, newVal)
+			displayStatus(targetKnob.dataset.area + " " + targetKnob.dataset.control, newVal, targetKnob.dataset.units);
 		}
 	};
 
-	var hideParamsTimeout;
-	var paramsWindow = document.querySelector("#params");
+	var statusWindow = document.querySelector("#status");
 
-	var displayParams = function(elem, val) {
-		if (typeof hideParamsTimeout !== undefined) {
-			window.clearTimeout(hideParamsTimeout);
+	var displayStatus = function(context, val, units) {
+		statusWindow.textContent = context;
+		if (val !== undefined) {
+			statusWindow.textContent += ": " + val;
+			if (units !== undefined) {
+				statusWindow.textContent += " " + units;
+			}
 		}
-		paramsWindow.textContent = val + " " + elem.dataset.units
-		paramsWindow.classList.remove("hide");
-		var top = elem.getBoundingClientRect().top + (elem.offsetHeight / 2);
-		var left = elem.getBoundingClientRect().left + elem.offsetWidth;
-		paramsWindow.style.top = top + "px";
-		paramsWindow.style.left = left + "px";
-		hideParamsTimeout = window.setTimeout(function() {
-			paramsWindow.classList.add("hide");
-		}, 1000);
 	};
 
 	var startKnobListener = function(event) {
@@ -156,6 +150,7 @@ window.addEventListener("load", function() {
 	var statusChangeCallback = function(response) {
 		if (response.status === "connected") {
 			enableSaving();
+			displayStatus("Status", "Logged In");
 			userId = response.authResponse.userID;
 		} else {
 			console.log(response);

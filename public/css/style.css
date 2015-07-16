@@ -47,15 +47,28 @@ section.osc {
 .hide {
 	display: none;
 }
-#params {
-	font-size: 18px;
-	background: #eee;
+#status {
+	font-size: 16px;
+	background: #253333;
 	border-radius: 3px;
-	border: 1px solid #7a7a7a;
-	z-index: 9999;
-	position: fixed;
-	padding: 0.5em;
-	color: #222;
+	position: relative;
+	padding: 0.5em 1em;
+	width: 100%;
+	color: #99D2D2;
+	text-shadow: 0 0 3px #99D2D2;
+	height: 1em;
+}
+#status-overlay {
+	background-image: url('/img/grid1.png');
+	background-repeat: repeat;
+	text-shadow: 0 0 8px #000;
+	position: absolute;
+	opacity: 0.3;
+	z-index: 99;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 .col {
 	display: inline-block;
@@ -95,11 +108,11 @@ input[type="range"].vertical {
 	text-align: center;
 }
 .knob:hover {
-	background: #e0e0f0;
-	box-shadow: 0 0 20px #e0e0f0;
+	background: #B8E0E0;
+	box-shadow: 0 0 20px #B8E0E0;
 }
 .knob:active {
-	box-shadow: 0 0 20px #e0e0f0;
+	box-shadow: 0 0 20px #B8E0E0;
 	background: #c0c0c0;
 }
 .knob.big {
