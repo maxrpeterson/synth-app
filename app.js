@@ -26,8 +26,31 @@ MongoClient.connect(mongoUri, function(error, db) {
 	});
 
 	app.post('/presets', function(req, res) {
-		console.log(req.body);
-		res.json({hello: "world"});
+		var response = {};
+		response.user = req.body.user
+		db.collection("presets").find({user: req.body.user}).toArray(function(err, result) {
+			if (result.length === 0) {
+				db.collection("presets").insert(req.body, function(err, results) {
+					response.results = results;
+					res.json(response);
+				});
+			} else {
+				db.collection("presets").update({user: req.body.user}, {$set: req.body.synth}, function(err, results) {
+					response.results = results;
+					res.json(response);
+				});
+			}
+		});
+
+	});
+
+	app.get('/presets/:user', function(req, res) {
+		console.log(req.params);
+		db.collection("presets").find({user: req.params["user"]}).toArray(function(err, preset) {
+			if(err) {throw err};
+			console.log(preset);
+			res.json({hello: "world"});
+		});
 	});
 
 	process.on('exit', function() {

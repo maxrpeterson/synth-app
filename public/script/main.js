@@ -175,18 +175,30 @@ window.addEventListener("load", function() {
 	};
 
 	var savePatch = function() {
-		var settings = JSON.stringify(polyOsc.get());
-		console.log(settings);
+		var settingsObj = {synth: polyOsc.get(), user: userId};
 		var ajaxPost = new XMLHttpRequest();
 		ajaxPost.onreadystatechange = function() {
-			if (ajaxPost.readyState === 4 && ajaxPost === 200) {
-				console.log(ajaxPost.responseText);
+			if (ajaxPost.readyState === 4 && ajaxPost.status === 200) {
 				console.log(JSON.parse(ajaxPost.responseText));
 			}
-		}
+		};
 		ajaxPost.open('POST', '/presets');
-		ajaxPost.send(settings);
+		ajaxPost.setRequestHeader('Content-Type', 'application/json');
+		var settingsStr = JSON.stringify(settingsObj)
+		ajaxPost.send(settingsStr);
 	};
 
+	var loadPatch = function() {
+		var ajaxGet = new XMLHttpRequest;
+		ajaxGet.onreadystatechange = function() {
+			if (ajaxGet.readyState === 4 && ajaxGet.status === 200) {
+				console.log(ajaxGet.responseText);
+				console.log(JSON.parse(ajaxGet.responseText));
+			}
+		};
+		var url = '/presets/' + userId;
+		ajaxGet.open('GET', url);
+		ajaxGet.send(null);
+	};
 
 });

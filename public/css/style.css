@@ -68,6 +68,9 @@ div.envelope {
 	position: relative;
 	height: 150px;
 }
+label {
+	line-height: 1em;
+}
 input[type="range"].vertical {
 	transform: rotate(270deg) translateY(-50%);
 	position: absolute;
@@ -91,7 +94,12 @@ input[type="range"].vertical {
 	box-shadow: 0 0 5px #7a7a7a;
 	text-align: center;
 }
+.knob:hover {
+	background: #e0e0f0;
+	box-shadow: 0 0 20px #e0e0f0;
+}
 .knob:active {
+	box-shadow: 0 0 20px #e0e0f0;
 	background: #c0c0c0;
 }
 .knob.big {
