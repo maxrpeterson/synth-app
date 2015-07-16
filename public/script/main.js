@@ -13,9 +13,6 @@ window.addEventListener("load", function() {
 		blackNotesColour: 'black',
 		hoverColour: '#f3e939'
 	});
-	uiKeyboard.style.position = "absolute";
-	uiKeyboard.style.bottom = 0;
-	uiKeyboard.style.left = 0;
 
 	// create the synth
 	var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
@@ -137,7 +134,7 @@ window.addEventListener("load", function() {
 	///////////////////////////
 
 
-	var checkLogin = function() {
+	window.checkLogin = function() {
 		FB.getLoginStatus(function(response) {
 			statusChangeCallback(response);
 		});
@@ -153,13 +150,27 @@ window.addEventListener("load", function() {
 			displayStatus("Status", "Logged In");
 			userId = response.authResponse.userID;
 		} else {
-			console.log(response);
+			disableSaving();
+			userId = undefined;
+			if (response.status === "not_authorized") {
+				displayStatus("Status", "Authorize the Synth App to enable saving patches");
+			} else if (response.status === "unknown") {
+				displayStatus("Status", "Log In to save patches");
+			}
+		}
+	};
+	var saveLoadDiv = document.querySelector(".save-load");
+	var disableSaving = function() {
+		if (saveLoadDiv.hasChildNodes) {
+			while(saveLoadDiv.firstChild) {
+				saveLoadDiv.removeChild(saveLoadDiv.firstChild);
+			}
 		}
 	};
 
 	var enableSaving = function() {
-		document.querySelector(".save-load").innerHTML = '<a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
-		document.querySelector(".save-load").addEventListener("click", function(e) {
+		saveLoadDiv.innerHTML = '<a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
+		saveLoadDiv.addEventListener("click", function(e) {
 			e.preventDefault();
 			if (e.target.id === "save") {
 				savePatch();

@@ -27,23 +27,26 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+	<div class="not-keyboard">
+		<header>
+			<div class="save-load"></div>
+			<div class="fb-login">
+				<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLogin();"></div>
+			</div>
+			<h1>Synth-o-Matic</h1>
+		</header>
 
-	<header>
-		<div class="save-load"></div>
-		<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLogin();">Log In to save patches</div>
-		<h1>Synth-o-Matic</h1>
-	</header>
+		<div id="status">
+		</div>
 
-	<div class="controls">
-		<div class="col" id="oscillators">
+		<div class="controls">
+			<div class="col" id="oscillators">
+			</div>
+			<div class="col" id="filter-amp">
+			</div>
+			<div class="col" id="effects">
+			</div>
 		</div>
-		<div class="col" id="filter-amp">
-		</div>
-		<div class="col" id="effects">
-		</div>
-	</div>
-	<div id="status">
-		<div id="status-overlay"></div>
 	</div>
 
 	<div id="keyboard">
@@ -54,19 +57,20 @@
 		<% for (var key in synth) { %>
 			<% if (key.slice(0,3) === "osc") { %>
 				<section class="osc <%= key %>">
-				<h2>Oscillator <%= parseInt(key.slice(3,4)) + 1 %></h2>
-				<label>Waveform</label>
-				<select name="osc-type" data-area="<%= key %>">
-					<% waveforms.forEach(function(waveType) { %>
-						<option value="<%= waveType %>">
-							<%= waveType.slice(0,1).toUpperCase() + waveType.slice(1) %>
-						</option>
-					<% }) %>
-				</select><br>
-				<label>Level</label>
-				<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
-				<label>Detune</label>
-				<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
+					<h2>Oscillator <%= parseInt(key.slice(3,4)) + 1 %></h2>
+					<label>Waveform</label>
+					<select name="osc-type" data-area="<%= key %>">
+						<% waveforms.forEach(function(waveType) { %>
+							<option value="<%= waveType %>">
+								<%= waveType.slice(0,1).toUpperCase() + waveType.slice(1) %>
+							</option>
+						<% }) %>
+					</select><br>
+					<label>Level</label>
+					<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
+					<label>Detune</label>
+					<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
+				</section>
 			<% } %>
 		<% } %>
 	</script>
