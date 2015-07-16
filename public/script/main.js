@@ -1,4 +1,4 @@
-// window.addEventListener("load", function() {
+window.addEventListener("load", function() {
 	var uiKeyboard = document.querySelector("#keyboard");
 
 	// generate the keyboard, may change this later
@@ -16,7 +16,7 @@
 
 	// create the synth
 	var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
-	polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000},filterEnvelope: {max: 2000}});
+	polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000}});
 
 	// possible options to pass to templates
 	var waveforms = ["sine", "square", "triangle", "sawtooth", "pulse", "pwm"];
@@ -142,7 +142,7 @@
 		});
 	};
 
-	// checkLogin();
+	checkLogin();
 
 	var userId;
 
@@ -199,7 +199,9 @@
 					if (response.results.nModified === 0) {
 						msg = "already Up-to-date";
 					} else if (response.results.nModified === 1) {
-						msg = "success";
+						msg = "overwrote old patch";
+					} else {
+						msg = "new patch";
 					}
 					displayStatus("Saved", msg, ":)");
 				} else {
@@ -224,7 +226,8 @@
 				if (response.results === "not_found") {
 					displayStatus("Error", "No patch found for current user");
 				} else {
-					polyOsc.set(response.results);
+					polyOsc.set(response.results.synth);
+					displayStatus("Loaded");
 				}
 			}
 		};
@@ -233,4 +236,4 @@
 		ajaxGet.send(null);
 	};
 
-// });
+});

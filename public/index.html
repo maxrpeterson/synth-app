@@ -66,10 +66,14 @@
 							</option>
 						<% }) %>
 					</select><br>
-					<label>Level</label>
-					<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
-					<label>Detune</label>
-					<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div><br>
+					<div class="control">
+						<label>Level</label>
+						<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
+					</div>
+					<div class="control">
+						<label>Detune</label>
+						<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div>
+					</div>
 				</section>
 			<% } %>
 		<% } %>
@@ -84,12 +88,18 @@
 					<option value="<%= filtType %>"><%= filtType.slice(0,1).toUpperCase() + filtType.slice(1) %></option>
 				<% }) %>
 				</select><br>
-				<label>Cutoff</label>
-				<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
-				<label>Q</label>
-				<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
-				<label>Env Amt</label>
-				<div class="knob" style="transform: rotate(-135deg)" data-area="filterEnvelope" data-control="exponent" data-min="0" data-max="10" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+				<div class="control">
+					<label>Cutoff</label>
+					<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
+				</div>
+				<div class="control">
+					<label>Q</label>
+					<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+				</div>
+				<div class="control">
+					<label>Env max (Amt.)</label>
+					<div class="knob" style="transform: rotate(135deg)" data-area="filterEnvelope" data-control="max" data-min="0" data-max="20000" data-basevalue="20000" data-origin="135" data-units="" data-scale="linear">&deg;</div><br>
+				</div>
 				<div class="envelope">
 				</div>
 			</section>
@@ -104,14 +114,22 @@
 	</script>
 
 	<script type="text/template" id="envelope-template">
-		<label>Attack</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="attack" min="0" max="3" step="0.005" data-units="s" value="<%= env.attack %>">
-		<label>Decay</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="decay" min="0" max="3" step="0.005" data-units="s" value="<%= env.decay %>">
-		<label>Sustain</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="sustain" min="0" max="1" step="0.005" data-units="" value="<%= env.sustain %>">
-		<label>Release</label>
-		<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="3" step="0.005" data-units="s" value="<%= env.release %>">
+		<div class="control">
+			<label>Attack</label>
+			<input class="vertical" data-area="<%= area %>" type="range" name="attack" min="0" max="3" step="0.005" data-units="s" value="<%= env.attack %>">
+		</div>
+		<div class="control">
+			<label>Decay</label>
+			<input class="vertical" data-area="<%= area %>" type="range" name="decay" min="0" max="3" step="0.005" data-units="s" value="<%= env.decay %>">
+		</div>
+		<div class="control">
+			<label>Sustain</label>
+			<input class="vertical" data-area="<%= area %>" type="range" name="sustain" min="0" max="1" step="0.005" data-units="" value="<%= env.sustain %>">
+		</div>
+		<div class="control">
+			<label>Release</label>
+			<input class="vertical" data-area="<%= area %>" type="range" name="release" min="0" max="3" step="0.005" data-units="s" value="<%= env.release %>">
+		</div>
 	</script>
 
 	<script type="text/javascript" src="script/polyosc.js"></script>

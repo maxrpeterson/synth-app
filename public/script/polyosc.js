@@ -102,6 +102,7 @@ Module(function (Tone) {
 		'filter': {
       'Q': 6,
       'type': 'lowpass',
+      'frequency': 20000,
       'rolloff': -12
     },
     'filterEnvelope': {
@@ -110,7 +111,7 @@ Module(function (Tone) {
       'sustain': 0,
       'release': 1,
       'max': 20000,
-      'attackCurve': 'exponential'
+      'attackCurve': 'linear'
     },
     'envelope': {
       'attack': 0.01,
