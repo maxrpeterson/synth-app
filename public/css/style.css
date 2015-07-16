@@ -12,6 +12,20 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+header {
+	line-height: 1.5em;
+	padding: 1em 0;
+}
+h1 {
+	margin: 0;
+	text-align: center;
+}
+a {
+	color: inherit;
+}
+a:hover {
+	color: #7a7a7a;
+}
 .save-load {
 	float: left;
 }
@@ -26,6 +40,9 @@ button {
 }
 section {
 	padding: 0.5em 0.2em;
+}
+section.osc {
+	margin-bottom: 1em;
 }
 .hide {
 	display: none;
@@ -54,6 +71,7 @@ div.envelope {
 input[type="range"].vertical {
 	transform: rotate(270deg) translateY(-50%);
 	position: absolute;
+	width: 10em;
 	top: 50%;
 	margin-left: -7em;
 }
@@ -85,4 +103,11 @@ select {
 	border: none;
 	font-size: 1em;
 	width: 8em;
+}
+
+#keyboard {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 }
