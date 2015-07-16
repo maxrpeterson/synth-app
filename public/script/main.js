@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+// window.addEventListener("load", function() {
 	var uiKeyboard = document.querySelector("#keyboard");
 
 	// generate the keyboard, may change this later
@@ -99,6 +99,7 @@ window.addEventListener("load", function() {
 		}
 	};
 
+	// status bar
 	var statusWindow = document.querySelector("#status");
 
 	var displayStatus = function(context, val, units) {
@@ -111,6 +112,7 @@ window.addEventListener("load", function() {
 		}
 	};
 
+	// start listening for mouse movement after clicking on a knob
 	var startKnobListener = function(event) {
 		if (event.target.tagName === "DIV" && event.target.classList.contains("knob")) {
 			var stopChangeListener = function(e) {
@@ -140,7 +142,7 @@ window.addEventListener("load", function() {
 		});
 	};
 
-	checkLogin();
+	// checkLogin();
 
 	var userId;
 
@@ -159,33 +161,51 @@ window.addEventListener("load", function() {
 			}
 		}
 	};
+
 	var saveLoadDiv = document.querySelector(".save-load");
 	var disableSaving = function() {
 		if (saveLoadDiv.hasChildNodes) {
 			while(saveLoadDiv.firstChild) {
+				saveLoadDiv.removeEventListener("click", saveLoadClickHandler)
 				saveLoadDiv.removeChild(saveLoadDiv.firstChild);
 			}
 		}
 	};
 
+	var saveLoadClickHandler = function(e) {		
+		e.preventDefault();
+		if (e.target.id === "save") {
+			savePatch();
+		} else if (e.target.id === "load") {
+			loadPatch();
+		}
+	};
+
 	var enableSaving = function() {
 		saveLoadDiv.innerHTML = '<a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
-		saveLoadDiv.addEventListener("click", function(e) {
-			e.preventDefault();
-			if (e.target.id === "save") {
-				savePatch();
-			} else if (e.target.id === "load") {
-				loadPatch();
-			}
-		});
+		saveLoadDiv.addEventListener("click", saveLoadClickHandler);
 	};
 
 	var savePatch = function() {
 		var settingsObj = {synth: polyOsc.get(), user: userId};
 		var ajaxPost = new XMLHttpRequest();
 		ajaxPost.onreadystatechange = function() {
-			if (ajaxPost.readyState === 4 && ajaxPost.status === 200) {
-				console.log(JSON.parse(ajaxPost.responseText));
+			if (ajaxPost.readyState === 2) {
+				displayStatus("Saving...")
+			} else if (ajaxPost.readyState === 4 && ajaxPost.status === 200) {
+				var response = JSON.parse(ajaxPost.responseText);
+				if (response.results.ok === 1) {
+					var msg = "";
+					if (response.results.nModified === 0) {
+						msg = "already Up-to-date";
+					} else if (response.results.nModified === 1) {
+						msg = "success";
+					}
+					displayStatus("Saved", msg, ":)");
+				} else {
+					console.log(response);
+					displayStatus("Something went wrong?");
+				}
 			}
 		};
 		ajaxPost.open('POST', '/presets');
@@ -197,9 +217,15 @@ window.addEventListener("load", function() {
 	var loadPatch = function() {
 		var ajaxGet = new XMLHttpRequest;
 		ajaxGet.onreadystatechange = function() {
-			if (ajaxGet.readyState === 4 && ajaxGet.status === 200) {
-				console.log(ajaxGet.responseText);
-				console.log(JSON.parse(ajaxGet.responseText));
+			if (ajaxGet.readyState === 2) {
+				displayStatus("Loading...");
+			} else if (ajaxGet.readyState === 4 && ajaxGet.status === 200) {
+				var response = JSON.parse(ajaxGet.responseText);
+				if (response.results === "not_found") {
+					displayStatus("Error", "No patch found for current user");
+				} else {
+					polyOsc.set(response.results);
+				}
 			}
 		};
 		var url = '/presets/' + userId;
@@ -207,4 +233,4 @@ window.addEventListener("load", function() {
 		ajaxGet.send(null);
 	};
 
-});
+// });

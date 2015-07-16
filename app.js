@@ -30,12 +30,14 @@ MongoClient.connect(mongoUri, function(error, db) {
 		response.user = req.body.user
 		db.collection("presets").find({user: req.body.user}).toArray(function(err, result) {
 			if (result.length === 0) {
+				console.log("new");
 				db.collection("presets").insert(req.body, function(err, results) {
 					response.results = results;
 					res.json(response);
 				});
 			} else {
-				db.collection("presets").update({user: req.body.user}, {$set: req.body.synth}, function(err, results) {
+				db.collection("presets").update({user: req.body.user}, {$set: {synth: req.body.synth}}, function(err, results) {
+					console.log("update");
 					response.results = results;
 					res.json(response);
 				});
@@ -45,11 +47,15 @@ MongoClient.connect(mongoUri, function(error, db) {
 	});
 
 	app.get('/presets/:user', function(req, res) {
-		console.log(req.params);
+		var response = {};
 		db.collection("presets").find({user: req.params["user"]}).toArray(function(err, preset) {
 			if(err) {throw err};
-			console.log(preset);
-			res.json({hello: "world"});
+			if (preset.length === 0) {
+				response.results = "not_found";
+			} else {
+				response.results = preset[0];
+			}
+			res.json(response);
 		});
 	});
 
