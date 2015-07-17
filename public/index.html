@@ -78,13 +78,62 @@
 			</div>
 
 			<div class="col" id="effects">
-				<section class="delay">
-
-				</section>
-				<section class="reverb">
-				</section>
 				<section class="chorus">
+					<h2>Chorus</h2>
+					<div class="control">
+						<label>Frequency</label>
+						<div class="knob big" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="frequency" data-min="0.1" data-max="4" data-basevalue="0.1" data-scale="linear" data-units="hz" data-origin="-135">&deg;</div>
+					</div>
+					<div class="control">
+						<label>Depth</label>
+						<div class="knob big" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="depth" data-min="0" data-max="1" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+					</div>
+					<div class="control">
+						<label>Delay Time</label>
+						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="delayTime" data-min="2" data-max="20" data-basevalue="2" data-origin="-135" data-units="ms" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Feedback</label>
+						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="chorus" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Dry/Wet</label>
+						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+					</div>
 				</section>
+
+				<section class="delay">
+					<h2>Delay</h2>
+					<div class="control">
+						<label>Delay Time</label>
+						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="delayTime" data-min="0" data-max="1" data-basevalue="0.5" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Feedback</label>
+						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Dry/Wet</label>
+						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="delay" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+					</div>
+				</section>
+
+				<section class="reverb">
+					<h2>Reverb</h2>
+					<div class="control">
+						<label>Room Size</label>
+						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="reverb" data-control="roomSize" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Dampening</label>
+						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="dampening" data-min="200" data-max="5000" data-basevalue="200" data-origin="-135" data-units="hz" data-scale="linear">&deg;</div><br>
+					</div>
+					<div class="control">
+						<label>Dry/Wet</label>
+						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+					</div>
+				</section>
+				
 				<section class="visualizer">
 				</section>
 			</div>

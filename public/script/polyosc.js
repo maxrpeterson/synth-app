@@ -106,7 +106,7 @@ Module(function (Tone) {
       'rolloff': -12
     },
     'filterEnvelope': {
-      'attack': 0,
+      'attack': 0.01,
       'decay': 0.5,
       'sustain': 0,
       'release': 1,

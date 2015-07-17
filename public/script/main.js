@@ -17,14 +17,19 @@ window.addEventListener("load", function() {
 
 
 	// create the synth
-	var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
-	polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000}});
+	var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc);
+	polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000, Q: 0}});
 
 	// effects
 	var effects = {};
-	effects.delay = new Tone.PingPongDelay();
-	effects.chorus = new Tone.Chorus();
+	effects.chorus = new Tone.Chorus(2, 2, 0.5);
+	effects.chorus.set({wet: 0});
+	effects.delay = new Tone.FeedbackDelay(0.5, 0.5);
+	effects.delay.set({wet: 0});
+	effects.reverb = new Tone.Freeverb(0.5, 200);
+	effects.reverb.set({wet: 0});
 
+	polyOsc.chain(effects.chorus, effects.delay, effects.reverb, Tone.Master);
 
 	// possible options to pass to templates
 	var waveforms = ["sine", "square", "triangle", "sawtooth", "pulse", "pwm"];
@@ -90,17 +95,20 @@ window.addEventListener("load", function() {
 			var rotationDiff = newRotation - rotationOrigin;
 			if (targetKnob.dataset.scale === "log") {
 				// fix this
-				increment = (range / 270) // / Math.pow(newRotation - rotationOrigin);
+				increment = (range / 270) // / Math.pow(newRotation - rotationOrigin); ?
 			} else if (targetKnob.dataset.scale === "exp") {
-				increment = (range / 270) // / Math.pow(newRotation - rotationOrigin);
+				increment = (range / 270) // / Math.pow(newRotation - rotationOrigin); ?
 			} else {
 				increment = range / 270;
 			}
 			var newVal = baseValue + rotationDiff * increment;
 			var params = {};
-			// if (targetKnob.dataset.)
 			params[targetKnob.dataset.control] = newVal;
-			polyOsc.set(targetKnob.dataset.area, params);
+			if (targetKnob.dataset.effects) {
+				effects[targetKnob.dataset.area].set(params)
+			} else {
+				polyOsc.set(targetKnob.dataset.area, params);
+			}
 			displayStatus(targetKnob.dataset.area + " " + targetKnob.dataset.control, newVal, targetKnob.dataset.units);
 		}
 	};
