@@ -42,7 +42,7 @@ a:hover {
 }
 .save-load {
 	margin-left: 1em;
-	font-size: 14px;
+	font-size: 1.2em;
 	left: 0;
 }
 .fb-login {
@@ -71,7 +71,7 @@ div.control {
 	text-align: center;
 }
 #status {
-	font-size: 16px;
+	font-size: 1.3em;
 	background: url('/img/grid1.png') #253333;
 	border-radius: 3px;
 	position: relative;
@@ -88,7 +88,7 @@ div.control {
 	display: inline-block;
 	width: 31vw;
 	height: 100%;
-	margin: 0 1em;
+	margin: 0 1vw;
 	box-sizing: border-box;
 	vertical-align: top;
 }
@@ -117,7 +117,6 @@ input[type="range"].vertical {
 	background: #eee;
 	color: #7a7a7a;
 	display: inline-block;
-	font-size: 12px;
 	height: 18px;
 	width: 18px;
 	padding: 1px;

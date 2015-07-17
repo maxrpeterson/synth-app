@@ -201,23 +201,25 @@ window.addEventListener("load", function() {
 	};
 
 	var savePatch = function() {
-		var settingsObj = {synth: polyOsc.get(), user: userId};
+		var effectsSettings = {chorus: effects.chorus.get(), delay: effects.delay.get(), reverb: effects.reverb.get()}
+		var settingsObj = {synth: polyOsc.get(), user: userId, effects: effectsSettings};
 		var ajaxPost = new XMLHttpRequest();
 		ajaxPost.onreadystatechange = function() {
 			if (ajaxPost.readyState === 2) {
 				displayStatus("Saving...")
 			} else if (ajaxPost.readyState === 4 && ajaxPost.status === 200) {
 				var response = JSON.parse(ajaxPost.responseText);
-				if (response.results.ok === 1) {
+				console.log(response);
+				if (response.result.ok === 1) {
 					var msg = "";
-					if (response.results.nModified === 0) {
-						msg = "already Up-to-date";
-					} else if (response.results.nModified === 1) {
+					if (response.result.nModified === 0 && response.result.upserted) {
+						msg = "new patch";
+					} else if (response.result.nModified === 1) {
 						msg = "overwrote old patch";
 					} else {
-						msg = "new patch";
+						msg = "already Up-to-date";
 					}
-					displayStatus("Saved", msg, ":)");
+					displayStatus("Saved", msg);
 				} else {
 					console.log(response);
 					displayStatus("Something went wrong?");
@@ -237,10 +239,13 @@ window.addEventListener("load", function() {
 				displayStatus("Loading...");
 			} else if (ajaxGet.readyState === 4 && ajaxGet.status === 200) {
 				var response = JSON.parse(ajaxGet.responseText);
-				if (response.results === "not_found") {
+				if (response.result === "not_found") {
 					displayStatus("Error", "No patch found for current user");
 				} else {
-					polyOsc.set(response.results.synth);
+					polyOsc.set(response.result.synth);
+					for (var prop in response.result.effects) {
+						effects[prop].set(response.result.effects[prop]);
+					}
 					displayStatus("Loaded");
 				}
 			}
