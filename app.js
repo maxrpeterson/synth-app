@@ -14,7 +14,6 @@ if (app.get('env') === 'development') {
 
 var fbAppId = process.env.FB_APP_ID;
 
-app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -32,7 +31,7 @@ MongoClient.connect(mongoUri, function(error, db) {
 
 
 	app.get('/', function(req, res) {
-		res.render('/index.ejs', {fbAppId: fbAppId});
+		res.sendFile('index.html');
 	});
 
 	app.post('/presets', function(req, res) {
