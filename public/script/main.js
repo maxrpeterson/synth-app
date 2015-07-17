@@ -209,7 +209,6 @@ window.addEventListener("load", function() {
 				displayStatus("Saving...")
 			} else if (ajaxPost.readyState === 4 && ajaxPost.status === 200) {
 				var response = JSON.parse(ajaxPost.responseText);
-				console.log(response);
 				if (response.result.ok === 1) {
 					var msg = "";
 					if (response.result.nModified === 0 && response.result.upserted) {
