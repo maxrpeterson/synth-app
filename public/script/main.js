@@ -14,9 +14,17 @@ window.addEventListener("load", function() {
 		hoverColour: '#f3e939'
 	});
 
+
+
 	// create the synth
 	var polyOsc = new Tone.PolySynth(6, Tone.PolyOsc).toMaster();
 	polyOsc.set({osc1: {volume: -99}, osc2: {volume: -99},filter: {frequency: 20000}});
+
+	// effects
+	var effects = {};
+	effects.delay = new Tone.PingPongDelay();
+	effects.chorus = new Tone.Chorus();
+
 
 	// possible options to pass to templates
 	var waveforms = ["sine", "square", "triangle", "sawtooth", "pulse", "pwm"];
@@ -24,17 +32,14 @@ window.addEventListener("load", function() {
 
 
 	// using templates
+	var optionsTemplate = _.template(document.querySelector("#options-template").innerHTML);
 	var oscTemplate = _.template(document.querySelector("#oscillator-template").innerHTML);
-	document.querySelector("#oscillators").innerHTML = oscTemplate({synth: polyOsc.get(), waveforms: waveforms});
+	document.querySelector("#oscillators").innerHTML = oscTemplate({synth: polyOsc.get(), waveforms: waveforms, optionsTemplate: optionsTemplate});
 
-	var filtTemplate = _.template(document.querySelector("#filter-template").innerHTML);
-	var filterHTML = filtTemplate({filterTypes: filterTypes});
-	var ampTemplate = _.template(document.querySelector("#amp-template").innerHTML);
-	var ampHTML = ampTemplate({});
+	document.querySelector(".filter select").innerHTML = optionsTemplate({options: filterTypes});
+
 
 	var envelopeTemplate = _.template(document.querySelector("#envelope-template").innerHTML);
-
-	document.querySelector("#filter-amp").innerHTML = filterHTML + ampHTML;
 
 	document.querySelector("section.filter .envelope").innerHTML = envelopeTemplate({area: "filterEnvelope", env: polyOsc.get("filterEnvelope").filterEnvelope});
 	document.querySelector("section.amp .envelope").innerHTML = envelopeTemplate({area: "envelope", env: polyOsc.get("envelope").envelope});
@@ -93,6 +98,7 @@ window.addEventListener("load", function() {
 			}
 			var newVal = baseValue + rotationDiff * increment;
 			var params = {};
+			// if (targetKnob.dataset.)
 			params[targetKnob.dataset.control] = newVal;
 			polyOsc.set(targetKnob.dataset.area, params);
 			displayStatus(targetKnob.dataset.area + " " + targetKnob.dataset.control, newVal, targetKnob.dataset.units);

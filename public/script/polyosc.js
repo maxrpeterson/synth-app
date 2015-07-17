@@ -110,7 +110,8 @@ Module(function (Tone) {
       'decay': 0.5,
       'sustain': 0,
       'release': 1,
-      'max': 20000,
+      'max': 4000,
+      'exponent': 2,
       'attackCurve': 'linear'
     },
     'envelope': {
