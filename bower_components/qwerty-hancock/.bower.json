@@ -1,0 +1,45 @@
+{
+  "name": "qwerty-hancock",
+  "main": "dist/qwerty-hancock.js",
+  "version": "0.4.5",
+  "homepage": "http://stuartmemo.com/qwerty-hancock/",
+  "authors": [
+    {
+      "name": "Stuart Memo",
+      "email": "stuartmemo@gmail.com",
+      "homepage": "http://stuartmemo.com"
+    }
+  ],
+  "description": "An interactive HTML plugin-free keyboard for your web audio project.",
+  "keywords": [
+    "web audio",
+    "keyboard",
+    "music",
+    "musical",
+    "qwerty",
+    "piano"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stuartmemo/qwerty-hancock"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "private": "false",
+  "_release": "0.4.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.5",
+    "commit": "5c9f644068d19551fa06e77b2be2de3babcf5e5b"
+  },
+  "_source": "git://github.com/stuartmemo/qwerty-hancock.git",
+  "_target": "~0.4.5",
+  "_originalSource": "qwerty-hancock",
+  "_direct": true
+}
