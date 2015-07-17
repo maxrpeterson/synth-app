@@ -6,12 +6,15 @@ var bodyParser = require('body-parser');
 
 var port = process.env.PORT || 3000;
 
-// if (app.get('env') === 'development') {
-// 	console.log("app is in development environment");
-// 	var morgan = require('morgan');
-// 	app.use(morgan('combined'));
-// }
+if (app.get('env') === 'development') {
+	console.log("app is in development environment");
+	var morgan = require('morgan');
+	app.use(morgan('combined'));
+}
 
+var fbAppId = process.env.FB_APP_ID;
+
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -29,7 +32,7 @@ MongoClient.connect(mongoUri, function(error, db) {
 
 
 	app.get('/', function(req, res) {
-		res.send('/index.html');
+		res.render('/index.ejs', {fbAppId: fbAppId});
 	});
 
 	app.post('/presets', function(req, res) {
