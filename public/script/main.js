@@ -144,6 +144,16 @@ window.addEventListener("load", function() {
 
 	window.addEventListener("mousedown", startKnobListener);
 
+	var meterDisplay = document.querySelector("div.meter");
+	var meterContainer = document.querySelector("div.meter-container");
+
+	var meter = new Tone.Meter();
+	polyOsc.connect(meter);
+
+	var setMeterDisplay = function() {
+		meterDisplay.style.width = parseInt(meterContainer.offsetWidth * meter.getLevel()) + "px";
+	};
+	var meterInterval = window.setInterval(setMeterDisplay, 20);
 
 	///////////////////////////
 	// SAVING & LOADING PATCHES

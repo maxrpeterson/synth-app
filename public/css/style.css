@@ -27,7 +27,7 @@ h1, h2 {
 	text-align: center;
 }
 h2 {
-	margin-bottom: 0.5em;
+	margin-bottom: 0.3em;
 }
 a {
 	color: inherit;
@@ -106,7 +106,7 @@ div.control label {
 input[type="range"].vertical {
 	transform: rotate(270deg) translateY(-50%);
 	position: absolute;
-	width: 8em;
+	width: 7em;
 	top: 50%;
 	margin-left: -3.5em;
 }
@@ -145,6 +145,17 @@ select {
 	border: none;
 	font-size: 1em;
 	width: 8em;
+}
+.meter-container {
+	height: 2em;
+	background-color: #333;
+}
+.meter {
+	height: 100%;
+	background: #29A629;
+	width: 100%;
+	transition: width 0.01s;
+	/*background: #E60000;*/
 }
 
 #keyboard {
