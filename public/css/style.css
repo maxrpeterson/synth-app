@@ -17,8 +17,6 @@ header {
 	position: relative;
 	line-height: 1.5em;
 	padding: 1em 0;
-}
-header, section {
 	background: #eee;
 }
 h1, h2 {
@@ -55,9 +53,11 @@ button {
 	border: none;
 }
 section {
+	/*background: url(http://images.naldzgraphics.net/2014/08/20-brushed-seamless-texture.jpg) no-repeat;*/
+	background: #eee;
 	padding: 1em;
 	border-radius: 3px;
-	margin: 2em 0;
+	margin-bottom: 2em;
 }
 .hide {
 	display: none;
@@ -86,9 +86,9 @@ div.control {
 }
 .col {
 	display: inline-block;
-	width: 30vw;
+	width: 31vw;
 	height: 100%;
-	margin: 0 1em;
+	margin: 0 0.8em;
 	box-sizing: border-box;
 	vertical-align: top;
 }
@@ -101,14 +101,18 @@ div.control label {
 }
 .envelope {
 	position: relative;
-	height: 10em;
+	height: 9em;
+	margin-bottom: -0.5em;
+}
+.envelope .control {
+	height: 85%;
 }
 input[type="range"].vertical {
 	transform: rotate(270deg) translateY(-50%);
 	position: absolute;
 	width: 7em;
 	top: 50%;
-	margin-left: -3.5em;
+	margin-left: -3em;
 }
 .knob {
 	font-family: sans-serif;
@@ -117,8 +121,8 @@ input[type="range"].vertical {
 	background: #eee;
 	color: #7a7a7a;
 	display: inline-block;
-	height: 18px;
-	width: 18px;
+	height: 22px;
+	width: 22px;
 	padding: 1px;
 	margin: 0.2em;
 	vertical-align: center;
@@ -137,8 +141,8 @@ input[type="range"].vertical {
 	background: #c0c0c0;
 }
 .knob.big {
-	height: 30px;
-	width: 30px;
+	height: 35px;
+	width: 35px;
 }
 select {
 	outline: none;
@@ -147,7 +151,7 @@ select {
 	width: 8em;
 }
 .meter-container {
-	height: 2em;
+	height: 1em;
 	background-color: #333;
 }
 .meter {
@@ -163,5 +167,5 @@ select {
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	height: 33vh;
+	height: 20vh;
 }

@@ -6,14 +6,14 @@ window.addEventListener("load", function() {
 	var keyboard = new QwertyHancock({
 		id: 'keyboard',
 		width: parseInt(window.innerWidth),
-		height: parseInt(window.innerHeight / 4),
+		height: parseInt(window.innerHeight / 5),
 		octaves: 3,
 		startNote: 'C3',
 		whiteNotesColour: 'white',
 		blackNotesColour: 'black',
 		hoverColour: '#f3e939'
 	});
-
+	uiKeyboard.style.position = "absolute";
 
 
 	// create the synth
