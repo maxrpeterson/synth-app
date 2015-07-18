@@ -14,7 +14,7 @@
 	<script>
 		window.fbAsyncInit = function() {
 		  FB.init({
-		    appId      : '1611693655767510',
+		    appId      : '1612400809030128',
 		    xfbml      : true,
 		    version    : 'v2.4'
 		  });
@@ -29,13 +29,16 @@
 		 }(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<div class="not-keyboard">
+	<div class="about">
+	</div>
+	<div class="container">
 		<header>
-			<div class="save-load"></div>
-			<div class="fb-login">
+			<div class="login-save-load">
 				<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLogin();"></div>
+				<div class="save-load"></div>
 			</div>
 			<h1>Synth-o-Matic</h1>
+			<a class="about-link" href="#">About</a>
 		</header>
 
 		<div id="status">
@@ -56,11 +59,11 @@
 
 				<div class="control">
 					<label>Cutoff</label>
-					<div class="knob big" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
+					<div class="knob" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
 				</div>
 				<div class="control">
 					<label>Q</label>
-					<div class="knob big" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+					<div class="knob" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
 				</div>
 				<div class="control">
 					<label>Env max (Amt.)</label>
@@ -83,23 +86,23 @@
 					<h2>Chorus</h2>
 					<div class="control">
 						<label>Frequency</label>
-						<div class="knob big" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="frequency" data-min="0.1" data-max="4" data-basevalue="0.1" data-scale="linear" data-units="hz" data-origin="-135">&deg;</div>
+						<div class="knob" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="frequency" data-min="0.1" data-max="4" data-basevalue="0.1" data-scale="linear" data-units="hz" data-origin="-135">&deg;</div>
 					</div>
 					<div class="control">
 						<label>Depth</label>
-						<div class="knob big" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="depth" data-min="0" data-max="1" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+						<div class="knob" style="transform: rotate(0deg);" data-effects="true" data-area="chorus" data-control="depth" data-min="0" data-max="1" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
 					</div>
 					<div class="control">
 						<label>Delay Time</label>
-						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="delayTime" data-min="2" data-max="20" data-basevalue="2" data-origin="-135" data-units="ms" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="delayTime" data-min="2" data-max="20" data-basevalue="2" data-origin="-135" data-units="ms" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Feedback</label>
-						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="chorus" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(0deg)" data-effects="true" data-area="chorus" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Dry/Wet</label>
-						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(-135deg)" data-effects="true" data-area="chorus" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
 					</div>
 				</section>
 
@@ -107,15 +110,15 @@
 					<h2>Delay</h2>
 					<div class="control">
 						<label>Delay Time</label>
-						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="delayTime" data-min="0" data-max="1" data-basevalue="0.5" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="delayTime" data-min="0" data-max="1" data-basevalue="0.5" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Feedback</label>
-						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(0deg)" data-effects="true" data-area="delay" data-control="feedback" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="s" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Dry/Wet</label>
-						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="delay" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(-135deg)" data-effects="true" data-area="delay" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
 					</div>
 				</section>
 
@@ -123,15 +126,15 @@
 					<h2>Reverb</h2>
 					<div class="control">
 						<label>Room Size</label>
-						<div class="knob big" style="transform: rotate(0deg)" data-effects="true" data-area="reverb" data-control="roomSize" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(0deg)" data-effects="true" data-area="reverb" data-control="roomSize" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Dampening</label>
-						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="dampening" data-min="200" data-max="5000" data-basevalue="200" data-origin="-135" data-units="hz" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="dampening" data-min="200" data-max="5000" data-basevalue="200" data-origin="-135" data-units="hz" data-scale="linear">&deg;</div><br>
 					</div>
 					<div class="control">
 						<label>Dry/Wet</label>
-						<div class="knob big" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
+						<div class="knob" style="transform: rotate(-135deg)" data-effects="true" data-area="reverb" data-control="wet" data-min="0" data-max="1" data-basevalue="0" data-origin="-135" data-units="" data-scale="linear">&deg;</div><br>
 					</div>
 				</section>
 				
@@ -140,13 +143,11 @@
 						<div class="meter"></div>
 					</div>
 				</section>
-				
 			</div>
-
 		</div>
-	</div>
 
-	<div id="keyboard">
+		<div id="keyboard">
+		</div>
 	</div>
 
 	<script type="text/template" id="oscillator-template">
@@ -160,11 +161,11 @@
 					</select><br>
 					<div class="control">
 						<label>Level</label>
-						<div class="knob big" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
+						<div class="knob" style="transform: rotate(-135deg);" data-area="<%= key %>" data-control="volume" data-min="-99" data-max="0" data-basevalue="-99" data-scale="linear" data-units="dB" data-origin="-135">&deg;</div>
 					</div>
 					<div class="control">
 						<label>Detune</label>
-						<div class="knob big" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div>
+						<div class="knob" style="transform: rotate(0deg);" data-area="<%= key %>" data-control="detune" data-min="-100" data-max="100" data-basevalue="0" data-scale="linear" data-units="cents" data-origin="0">&deg;</div>
 					</div>
 					<div class="control">
 						<label>Width (Pulse)</label>

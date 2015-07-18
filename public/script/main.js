@@ -206,7 +206,7 @@ window.addEventListener("load", function() {
 	};
 
 	var enableSaving = function() {
-		saveLoadDiv.innerHTML = '<a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
+		saveLoadDiv.innerHTML = ' | <a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
 		saveLoadDiv.addEventListener("click", saveLoadClickHandler);
 	};
 
@@ -263,5 +263,11 @@ window.addEventListener("load", function() {
 		ajaxGet.open('GET', url);
 		ajaxGet.send(null);
 	};
+
+	var aboutPane = document.querySelector("div.about");
+	var aboutLink = document.querySelector("a.about-link");
+	var toggleAboutPane = function(e) {
+
+	}
 
 });
