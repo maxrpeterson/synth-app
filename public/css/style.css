@@ -19,6 +19,21 @@ div.about {
 	left: 0;
 	bottom: 0;
 	right: 0;
+	z-index: 99;
+	background: rgba(0,0,0,0.85);
+	font-size: 20px;
+}
+article {
+	max-width: 60%;
+	margin: 3em auto;
+	padding: 2em;
+}
+.escape {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 1em;
+	cursor: pointer;
 }
 .hide {
 	display: none;
@@ -35,18 +50,22 @@ header {
 	font-size: 16px;
 }
 h1, h2 {
-	font-weight: 700;
-	margin: 0;
 	text-align: center;
 }
-h2 {
+.container h1, .container h2 {
+	font-weight: 700;
+	margin: 0;
+}
+.container h2 {
 	margin-bottom: 0.2em;
 }
 a {
 	color: inherit;
+}
+header a {
 	text-decoration: none;
 }
-a:hover {
+a:hover, li:hover {
 	color: #7a7a7a;
 }
 .login-save-load {
@@ -56,7 +75,14 @@ a:hover {
 	left: 0;
 	margin-left: 1em;
 }
-.login-save-load div {
+ul {
+	list-style: none;
+	padding: 0;
+	display: inline-block;
+}
+li {
+	margin-left: 1em;
+	cursor: pointer;
 	display: inline-block;
 }
 .fb-login-button.fb_iframe_widget {

@@ -78,7 +78,6 @@ window.addEventListener("load", function() {
 		}
 	});
 
-	// knob handlers (har har), could probably be cleaned up a bit?
 	var setAttr = function(targetKnob, e) {
 		// get the current rotate amount of the knob
 		var currRotation = parseInt(targetKnob.style.transform.slice(7, -4));
@@ -155,10 +154,8 @@ window.addEventListener("load", function() {
 	};
 	var meterInterval = window.setInterval(setMeterDisplay, 20);
 
-	///////////////////////////
-	// SAVING & LOADING PATCHES
-	///////////////////////////
 
+	// SAVING & LOADING PATCHES //
 
 	window.checkLogin = function() {
 		FB.getLoginStatus(function(response) {
@@ -187,6 +184,7 @@ window.addEventListener("load", function() {
 	};
 
 	var saveLoadDiv = document.querySelector(".save-load");
+
 	var disableSaving = function() {
 		if (saveLoadDiv.hasChildNodes) {
 			while(saveLoadDiv.firstChild) {
@@ -197,7 +195,6 @@ window.addEventListener("load", function() {
 	};
 
 	var saveLoadClickHandler = function(e) {		
-		e.preventDefault();
 		if (e.target.id === "save") {
 			savePatch();
 		} else if (e.target.id === "load") {
@@ -206,7 +203,7 @@ window.addEventListener("load", function() {
 	};
 
 	var enableSaving = function() {
-		saveLoadDiv.innerHTML = ' | <a href="#" id="save">Save Patch</a> | <a href="#" id="load">Load Patch</a>';
+		saveLoadDiv.innerHTML = '<li id="save">Save Patch</li><li id="load">Load Patch</li>';
 		saveLoadDiv.addEventListener("click", saveLoadClickHandler);
 	};
 
@@ -264,10 +261,20 @@ window.addEventListener("load", function() {
 		ajaxGet.send(null);
 	};
 
+	// toggling the "about" section
 	var aboutPane = document.querySelector("div.about");
 	var aboutLink = document.querySelector("a.about-link");
+	var escapeButton = document.querySelector(".escape");
 	var toggleAboutPane = function(e) {
+		aboutPane.classList.toggle("hide");
+	};
 
-	}
+	escapeButton.addEventListener("click", toggleAboutPane);
+	aboutLink.addEventListener("click", toggleAboutPane);
+	window.addEventListener("keydown", function(e) {
+		if (e.which === 27) {
+			aboutPane.classList.add("hide");
+		}
+	});
 
 });

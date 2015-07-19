@@ -14,7 +14,7 @@
 	<script>
 		window.fbAsyncInit = function() {
 		  FB.init({
-		    appId      : '1611693655767510',
+		    appId      : '1612400809030128',
 		    xfbml      : true,
 		    version    : 'v2.4'
 		  });
@@ -30,12 +30,19 @@
 	</script>
 
 	<div class="about hide">
+		<div class="escape">X</div>
+		<article>
+			<h1>About this project</h1>
+			<p>A three-oscillator synthesizer you can play with your keyboard. The keys in the "asdf..." row control the white keys, and the black keys are in the "qwer..." row. To control the knobs, click and drag your mouse &uarr; and &darr;.</p>
+			<p>I created this project for my final project for General Assembly's Web Development Immersive class. I used <a href="https://github.com/Tonejs/Tone.js">Tone.js</a> to help simplify the synth code, and <a href="https://github.com/stuartmemo/qwerty-hancock">Qwerty Hancock</a> for the keyboard. There is a very small Node.js &amp; Express.js server on the back end, which saves presets to a MongoDB collection.</p>
+			<p>Check out my <a href="https://github.com/maxrpeterson">GitHub</a> and <a href="https://www.linkedin.com/in/petersonmaxr">LinkedIn</a>!</p>
+		</article>
 	</div>
 	<div class="container">
 		<header>
 			<div class="login-save-load">
 				<div class="fb-login-button" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLogin();"></div>
-				<div class="save-load"></div>
+				<ul class="save-load"></ul>
 			</div>
 			<h1>Synth-o-Matic</h1>
 			<a class="about-link" href="#">About</a>
