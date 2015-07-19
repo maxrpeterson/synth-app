@@ -45,44 +45,43 @@
 		</div>
 
 		<div class="controls">
-
 			<div class="col" id="oscillators">
 			</div>
 
 			<div class="col" id="filter-amp">
-			<section class="filter" data-area="filter">
-				<h2>Filter</h2>
-				<label>Type</label>
+				<section class="filter" data-area="filter">
+					<h2>Filter</h2>
+					<label>Type</label>
 
-				<select data-area="filter" name="type">
-				</select><br>
+					<select data-area="filter" name="type">
+					</select><br>
 
-				<div class="control">
-					<label>Cutoff</label>
-					<div class="knob" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
-				</div>
-				<div class="control">
-					<label>Q</label>
-					<div class="knob" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
-				</div>
-				<div class="control">
-					<label>Env max (Amt.)</label>
-					<div class="knob" style="transform: rotate(135deg)" data-area="filterEnvelope" data-control="max" data-min="0" data-max="20000" data-basevalue="20000" data-origin="135" data-units="" data-scale="linear">&deg;</div><br>
-				</div>
+					<div class="control">
+						<label>Cutoff</label>
+						<div class="knob" style="transform: rotate(135deg);" data-area="filter" data-control="frequency" data-min="20" data-max="20000" data-basevalue="20000" data-scale="exp" data-units="hz" data-origin="135">&deg;</div>
+					</div>
+					<div class="control">
+						<label>Q</label>
+						<div class="knob" style="transform: rotate(-135deg);" data-area="filter" data-control="Q" data-min="0" data-max="16" data-basevalue="0" data-scale="linear" data-units="" data-origin="-135">&deg;</div>
+					</div>
+					<div class="control">
+						<label>Env max (Amt.)</label>
+						<div class="knob" style="transform: rotate(135deg)" data-area="filterEnvelope" data-control="max" data-min="0" data-max="20000" data-basevalue="20000" data-origin="135" data-units="" data-scale="linear">&deg;</div><br>
+					</div>
 
-				<div class="envelope">
-				</div>
+					<div class="envelope">
+					</div>
 
-			</section>
-			<section class="amp">
-				<h2>Amplitude Envelope</h2>
-				<div class="envelope">
-				</div>
-			</section>				
+				</section>
+				<section class="amp">
+					<h2>Amplitude Envelope</h2>
+					<div class="envelope">
+					</div>
+				</section>				
 			</div>
 
 			<div class="col" id="effects">
-				<section class="chorus">
+				<section class="effect chorus">
 					<h2>Chorus</h2>
 					<div class="control">
 						<label>Frequency</label>
@@ -106,7 +105,7 @@
 					</div>
 				</section>
 
-				<section class="delay">
+				<section class="effect delay">
 					<h2>Delay</h2>
 					<div class="control">
 						<label>Delay Time</label>
@@ -122,7 +121,7 @@
 					</div>
 				</section>
 
-				<section class="reverb">
+				<section class="effect reverb">
 					<h2>Reverb</h2>
 					<div class="control">
 						<label>Room Size</label>
