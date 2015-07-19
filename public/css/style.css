@@ -208,10 +208,10 @@ input[type="range"].vertical {
 }
 .knob:hover {
 	background: #fff;
-	box-shadow: 0 0 20px #fff;
+	box-shadow: 0 0 10px #fff;
 }
 .knob:active {
-	box-shadow: 0 0 20px #fff;
+	box-shadow: 0 0 10px #fff;
 	background: #c0c0c0;
 }
 select {
