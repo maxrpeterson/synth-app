@@ -15,11 +15,49 @@ Module(function (Tone) {
     // 3rd osc
     this.osc2 = new Tone.OmniOscillator(options.osc2);
     this.osc2.volume.value = -10;
-
+    // enumerate through oscillators
+    this.oscs = {osc0: this.osc0, osc1: this.osc1, osc2: this.osc2};
+    // who knows, might be cool to have some vibrato?
+    this._vibrato = new Tone.LFO(options.vibratoRate, -50, 50);
+    this._vibrato.start();
+    /**
+ * the vibrato frequency
+ * @type {Frequency}
+ * @signal
+ */
+    this.vibratoRate = this._vibrato.frequency;
+    /**
+ *  the vibrato gain
+ *  @type {GainNode}
+ *  @private
+ */
+    this._vibratoGain = this.context.createGain();
+    /**
+ * The amount of vibrato
+ * @type {Gain}
+ * @signal
+ */
+    this.vibratoAmount = new Tone.Signal(this._vibratoGain.gain, Tone.Type.Gain);
+    this.vibratoAmount.value = options.vibratoAmount;
+    /**
+ *  the delay before the vibrato starts
+ *  @type {number}
+ *  @private
+ */
+    this._vibratoDelay = this.toSeconds(options.vibratoDelay);
+    /**
+ *  the frequency control
+ *  @type {Frequency}
+ *  @signal
+ */
     this.frequency = new Tone.Signal(440, Tone.Type.Frequency);
 
     //control the three oscillators frequency
     this.frequency.fan(this.osc0.frequency, this.osc1.frequency, this.osc2.frequency);
+
+    // connects the vibrato
+    this._vibrato.connect(this._vibratoGain);
+    this._vibratoGain.fan(this.osc0.detune, this.osc1.detune, this.osc2.detune);
 
     // filter
     this.filter = new Tone.Filter(options.filter);
@@ -43,13 +81,20 @@ Module(function (Tone) {
         'osc1',
         'osc2',
         'filter',
-        'frequency'
+        'frequency',
+        'vibratoAmount',
+        'vibratoRate'
     ]);
   };
   Tone.extend(Tone.PolyOsc, Tone.Monophonic);
-
-
+    /**
+	 *  @static
+	 *  @type {Object}
+	 */
   Tone.PolyOsc.defaults = {
+    'vibratoAmount': 0,
+    'vibratoRate': 5,
+    'vibratoDelay': 1,
     'portamento': 0,
     'osc0': { 'type': 'sine', 'volume': 0 },
     'osc1': { 'type': 'sine', 'volume': -99 },
@@ -113,6 +158,8 @@ Module(function (Tone) {
       'osc1',
       'osc2',
       'frequency',
+      'vibratoAmount',
+      'vibratoRate'
     ]);
     this.osc0.dispose();
     this.osc0 = null;
@@ -122,6 +169,13 @@ Module(function (Tone) {
     this.osc2 = null;
     this.frequency.dispose();
     this.frequency = null;
+    this._vibrato.dispose();
+    this._vibrato = null;
+    this._vibratoGain.disconnect();
+    this._vibratoGain = null;
+    this.vibratoAmount.dispose();
+    this.vibratoAmount = null;
+    this.vibratoRate = null;
     return this;
   };
   return Tone.DuoSynth;

@@ -272,8 +272,12 @@ window.addEventListener("load", function() {
 	escapeButton.addEventListener("click", toggleAboutPane);
 	aboutLink.addEventListener("click", toggleAboutPane);
 	window.addEventListener("keydown", function(e) {
-		if (e.which === 27) {
+		if (e.keyCode === 27) {
 			aboutPane.classList.add("hide");
+		} else if (e.keyCode === 88) {
+			displayStatus("Octave", keyboard.octaveUp());
+		} else if (e.keyCode === 90) {
+			displayStatus("Octave", keyboard.octaveDown());
 		}
 	});
 
