@@ -10,7 +10,7 @@ For the guts of the synth, I created a new Tone.Instrument class to be able to u
 For the moment, this only works in Chrome, sorry!
 
 ### Check it out:
-[synth.maxpeterson.nyc](synth.maxpeterson.nyc)
+[synth.maxpeterson.nyc](http://synth.maxpeterson.nyc)
 
 ------
 ### Some Background
