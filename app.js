@@ -35,9 +35,11 @@ MongoClient.connect(mongoUri, function(error, db) {
 	});
 
 	app.post('/presets', function(req, res) {
+		// create an empty object for the response so I can add stuff to it later
 		var response = {};
 		if (req.body.user) {
 			response.user = req.body.user
+			// upsert creates a new document if it can't find one that matches the query
 			db.collection("presets").update({user: req.body.user}, {$set: {synth: req.body.synth, effects: req.body.effects, user: req.body.user}}, {upsert: true}, function(err, result) {
 				response.result = result;
 				res.json(response);
